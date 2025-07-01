@@ -1,5 +1,3 @@
-import { BasePage } from './base-page';
+import { BasePage } from "./base-page";
 
-export class MyAccountPage extends BasePage{
-
-}
+export class MyAccountPage extends BasePage {}

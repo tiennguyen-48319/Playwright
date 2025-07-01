@@ -1,7 +1,6 @@
 export const Env = {
-    baseUrl: process.env.BASE_URL ?? '',
-    defaultUser: process.env.DEFAULT_USER ?? '',
-    defaultPassword: process.env.DEFAULT_PASSWORD ?? '',
-    phoneNumber: process.env.PHONE_NUMBER ?? ''
-  };
-  
+  BASEURL: process.env.BASE_URL ?? "",
+  DEFAULT_USER: process.env.DEFAULT_USER ?? "",
+  DEFAULT_PASSWORD: process.env.DEFAULT_PASSWORD ?? "",
+  PHONE_NUMBER: process.env.PHONE_NUMBER ?? "",
+};

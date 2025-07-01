@@ -1,4 +1,4 @@
-export enum Departments {
-    Automobiles_Motorcycles = "Automobiles & Motorcycles",
-    Electronic_Components_Supplies = "Electronic Components & Supplies"
-}
+export const Departments = {
+  AUTOMOBILES_MOTORCYCLES: "Automobiles & Motorcycles",
+  ELECTRONIC_COMPONENTS_SUPPLIES: "Electronic Components & Supplies",
+} as const;
