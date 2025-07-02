@@ -30,9 +30,9 @@ export class OrderStatusPage extends BasePage {
     'ul.order_details li[class*="method"] > strong'
   );
 
-  async isSuccessMessageDisplayed(): Promise<boolean> {
-    return await this.successMessage.isVisible();
-  }
+  // async isSuccessMessageDisplayed(): Promise<boolean> {
+  //   return await this.successMessage.isVisible();
+  // }
 
   async getProductName(): Promise<string> {
     const rawText = await this.productName.textContent();

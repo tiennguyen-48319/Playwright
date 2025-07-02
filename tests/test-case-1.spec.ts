@@ -1,34 +1,32 @@
-import { test, expect } from "@playwright/test";
-import { TestBase } from "./test-base";
+import { test, expect } from "@fixtures";
 import { Env } from "@utils/env";
-import { Departments } from "@enum/Departments";
-import { ProductPage } from "@pages/product-page";
-import { CartPage } from "@pages/cart-page";
-import { CheckoutPage } from "@pages/checkout-page";
+import { Departments } from "@enum/departments";
 import { User } from "components/user";
-import { OrderStatusPage } from "@pages/order-status-page";
-import { PriceUtils } from "@utils/price-utils";
 import { expectPriceMatch, expectTextIgnoreCase } from "@utils/expect-utils";
 
-test("Verify users can buy an item successfully", async ({ page }) => {
-  const t = new TestBase(page);
-  const productPage = new ProductPage(page);
-  const cartPage = new CartPage(page);
-  const checkoutPage = new CheckoutPage(page);
-  const orderStatusPage = new OrderStatusPage(page);
+test("Verify users can buy an item successfully", async ({ pages, page }) => {
+  const {
+    loginPage,
+    checkoutPage,
+    productPage,
+    cartPage,
+    orderStatusPage,
+    myPage,
+  } = pages;
+
   const user = User.defaultUser();
 
   // 1. Open browser and go to https://demo.testarchitect.com/'
   await page.goto(Env.BASEURL);
 
-  await t.myPage.goToMyPage();
+  await myPage.goToMyPage();
 
   // 2. Login with valid credentials
-  await t.loginPage.login(Env.DEFAULT_USER, Env.DEFAULT_PASSWORD);
+  await loginPage.login();
 
   // 3. Navigate to All departments section
   // 4. Select Electronic Components & Supplies
-  await t.myPage.selectDepartment(Departments.ELECTRONIC_COMPONENTS_SUPPLIES);
+  await myPage.selectDepartment(Departments.ELECTRONIC_COMPONENTS_SUPPLIES);
 
   // 5. Verify the items should be displayed as a grid
   // await expect(productPage.getGridView()).toBeVisible();
@@ -44,7 +42,7 @@ test("Verify users can buy an item successfully", async ({ page }) => {
   const productInfo = await productPage.getProductInfo(randomIndex);
 
   // 9. Click 'Add to Cart'
-  productPage.addToCart(randomIndex);
+  await productPage.addToCart(randomIndex);
 
   // 10. Go to the cart
   await productPage.goToCartPage();
@@ -69,7 +67,7 @@ test("Verify users can buy an item successfully", async ({ page }) => {
   await checkoutPage.clickPlaceOrderBtn();
 
   // 16. Verify Order status page displays
-  expect(await orderStatusPage.isSuccessMessageDisplayed()).toBeTruthy();
+  await expect(orderStatusPage.successMessage).toBeVisible();
 
   // 17. Verify the Order details with billing and item information
   await expectTextIgnoreCase(orderStatusPage.productName, productInfo.name);

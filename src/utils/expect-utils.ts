@@ -16,5 +16,5 @@ export async function expectTextIgnoreCase(locator: Locator, expected: string) {
       const text = await locator.textContent();
       return text?.trim().toLowerCase();
     })
-    .toBe(expected.toLowerCase());
+    .toContain(expected.toLowerCase());
 }

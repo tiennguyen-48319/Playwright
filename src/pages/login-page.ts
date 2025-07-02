@@ -1,4 +1,5 @@
 // pages/LoginPage.ts
+import { Env } from "@utils/env";
 import { BasePage } from "./base-page";
 
 export class LoginPage extends BasePage {
@@ -6,9 +7,9 @@ export class LoginPage extends BasePage {
   readonly passwordInput = this.page.getByRole("textbox", { name: "password" });
   readonly loginButton = this.page.getByRole("button", { name: "Log in" });
 
-  async login(username: string, password: string) {
-    await this.usernameInput.fill(username);
-    await this.passwordInput.fill(password);
+  async login() {
+    await this.usernameInput.fill(Env.DEFAULT_USER);
+    await this.passwordInput.fill(Env.DEFAULT_PASSWORD);
     await this.loginButton.click();
   }
 }
