@@ -1,7 +1,6 @@
 import { PriceUtils } from "@utils/price-utils";
 import { BasePage } from "./base-page";
 import { ProductInfo } from "components/product-info";
-import { Locator } from "@playwright/test";
 
 export class CartPage extends BasePage {
   readonly productName = this.page.locator(".product-title");
@@ -38,10 +37,6 @@ export class CartPage extends BasePage {
     return PriceUtils.extractMinPriceFromText(text ?? "0");
   }
 
-  // getProductName(): Locator {
-  //   return this.productName;
-  // }
-
   async getProductPrice(): Promise<number> {
     const text = await this.productPrice.textContent();
     return PriceUtils.extractMinPriceFromText(text ?? "0");
@@ -76,7 +71,6 @@ export class CartPage extends BasePage {
   async removeAllProducts(): Promise<void> {
     while (await this.removeButtons.first().isVisible()) {
       await this.removeButtons.first().click();
-      // await this.page.waitForLoadState('networkidle');
     }
   }
 

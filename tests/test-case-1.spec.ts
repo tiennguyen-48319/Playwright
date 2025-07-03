@@ -1,6 +1,5 @@
 import { test, expect } from "@fixtures";
-import { Env } from "@utils/env";
-import { Departments } from "@enum/departments";
+import { Departments } from "data-types/departments";
 import { User } from "components/user";
 import { expectPriceMatch, expectTextIgnoreCase } from "@utils/expect-utils";
 
@@ -17,10 +16,6 @@ test("Verify users can buy an item successfully", async ({ pages, page }) => {
   const user = User.defaultUser();
 
   // 1. Open browser and go to https://demo.testarchitect.com/'
-  await page.goto(Env.BASEURL);
-
-  await myPage.goToMyPage();
-
   // 2. Login with valid credentials
   await loginPage.login();
 

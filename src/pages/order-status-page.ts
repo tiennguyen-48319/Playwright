@@ -1,5 +1,3 @@
-// src/pages/order-status-page.ts
-import { Locator, Page, expect } from "@playwright/test";
 import { BasePage } from "./base-page";
 import { PriceUtils } from "@utils/price-utils";
 import { User } from "components/user";
@@ -29,10 +27,6 @@ export class OrderStatusPage extends BasePage {
   readonly paymentMethodOrder = this.page.locator(
     'ul.order_details li[class*="method"] > strong'
   );
-
-  // async isSuccessMessageDisplayed(): Promise<boolean> {
-  //   return await this.successMessage.isVisible();
-  // }
 
   async getProductName(): Promise<string> {
     const rawText = await this.productName.textContent();

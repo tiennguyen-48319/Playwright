@@ -1,15 +1,15 @@
 import { ProductInfo } from "components/product-info";
 import { BasePage } from "./base-page";
 import { PriceUtils } from "@utils/price-utils";
-import { SortType } from "@enum/sort-type";
+import { SortType } from "data-types/sort-type";
 
 export class ProductPage extends BasePage {
   readonly usernameInput = this.page.getByRole("textbox", { name: "username" });
   readonly gridViewButton = this.page.locator("div[class*=switch-grid] > a");
   readonly listViewButton = this.page.locator("div.switch-list > a");
-  readonly sorting = this.page.locator('select.orderby');
-  readonly allPrice = this.page.locator('div.content-product span.price');
-  
+  readonly sorting = this.page.locator("select.orderby");
+  readonly allPrice = this.page.locator("div.content-product span.price");
+
   getProductViewType(type: string) {
     return this.page.locator(`div.products-loop.products-${type}`);
   }
@@ -23,7 +23,7 @@ export class ProductPage extends BasePage {
   }
 
   async switchToViewList() {
-    await this.listViewButton.click({timeout: 10000});
+    await this.listViewButton.click({ timeout: 10000 });
   }
 
   async getRandomProductIndex(): Promise<number> {
@@ -118,6 +118,6 @@ export class ProductPage extends BasePage {
 
   async getAllPriceOfProducts(): Promise<number[]> {
     const prices = await this.allPrice.allTextContents();
-    return prices.map(p => PriceUtils.extractMinPriceFromText(p));
+    return prices.map((p) => PriceUtils.extractMinPriceFromText(p));
   }
 }

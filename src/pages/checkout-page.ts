@@ -1,8 +1,6 @@
-import { Page, Locator } from "@playwright/test";
-
 import { BasePage } from "./base-page";
 import { PriceUtils } from "@utils/price-utils";
-import { PaymentMethods } from "@enum/payment-methods";
+import { PaymentMethods } from "data-types/payment-methods";
 import { User } from "components/user";
 
 export class CheckoutPage extends BasePage {
@@ -117,7 +115,7 @@ export class CheckoutPage extends BasePage {
 
   async submitOrderApplication(
     user: User,
-    method: PaymentMethods = PaymentMethods.DIRECT_BANK_TRANSFER
+    method: PaymentMethods
   ) {
     await this.fillInfo(user);
     await this.selectPaymentMethod(method);

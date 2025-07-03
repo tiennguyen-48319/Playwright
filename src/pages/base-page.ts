@@ -1,5 +1,4 @@
 import { Page, Locator, expect } from "@playwright/test";
-import { Env } from "@utils/env";
 
 export class BasePage {
   constructor(public readonly page: Page) {}
@@ -39,16 +38,12 @@ export class BasePage {
   }
 
   async goToCartPage() {
-    // await this.page.evaluate(() => window.scrollTo(0, 0));
-    // await this.cartButton.focus();
     await this.cartButton.click({ timeout: 10000 });
     await this.page.reload();
-    // await this.cartButton.hover();
-    // await this.page.getByText('Checkout').first().click();
   }
 
   async goToShopPage() {
-    await this.getMenuItem("Shop").click();
+    await this.getMenuItem("Shop").click({timeout: 10000});
     await this.closeAds();
   }
 }

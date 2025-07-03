@@ -1,10 +1,8 @@
 import { test, expect } from "@fixtures";
-import { Env } from "@utils/env";
 import { User } from "components/user";
-import { ProductInfo } from "components/product-info";
-import { PriceUtils } from "@utils/price-utils";
+import { PaymentMethods } from "data-types/payment-methods";
 
-test("Verify users can sort items by price", async ({ pages, page }) => {
+test("Verify users can sort items by price", async ({ pages}) => {
   const {
     loginPage,
     checkoutPage,
@@ -23,8 +21,8 @@ test("Verify users can sort items by price", async ({ pages, page }) => {
   await productPage.addToCart(productPosition);
   await productPage.goToCartPage();
   await cartPage.clickCheckoutBtn();
-  await checkoutPage.submitOrderApplication(user);
-  const orderInfo1 = orderStatusPage.getOrderInfo();
+  await checkoutPage.submitOrderApplication(user, PaymentMethods.DIRECT_BANK_TRANSFER);
+  const orderInfo1 = await orderStatusPage.getOrderInfo();
 
   await orderStatusPage.goToShopPage();
   await productPage.closeAds();
@@ -32,8 +30,8 @@ test("Verify users can sort items by price", async ({ pages, page }) => {
   await productPage.addToCart(productPosition);
   await productPage.goToCartPage();
   await cartPage.clickCheckoutBtn();
-  await checkoutPage.submitOrderApplication(user);
-  const orderInfo2 = orderStatusPage.getOrderInfo();
+  await checkoutPage.submitOrderApplication(user, PaymentMethods.DIRECT_BANK_TRANSFER);
+  const orderInfo2 = await orderStatusPage.getOrderInfo();
 
   // 1. Go to My Account page
   await orderStatusPage.goToMyPage();
@@ -42,4 +40,6 @@ test("Verify users can sort items by price", async ({ pages, page }) => {
   await myPage.goToOrderHistoryPage();
 
   // 3. Verify order details
+  await myPage.expectOrderHistoryToMatch(orderInfo1);
+  await myPage.expectOrderHistoryToMatch(orderInfo2);
 });

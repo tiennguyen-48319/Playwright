@@ -1,12 +1,9 @@
 import { test, expect } from "@fixtures";
-import { Env } from "@utils/env";
 import { User } from "components/user";
 import { ProductInfo } from "components/product-info";
+import { PaymentMethods } from "data-types/payment-methods";
 
-test("Verify users can buy multiple item successfully", async ({
-  pages,
-  page,
-}) => {
+test("Verify users can buy multiple item successfully", async ({pages}) => {
   const {
     loginPage,
     checkoutPage,
@@ -18,10 +15,6 @@ test("Verify users can buy multiple item successfully", async ({
   const user = User.defaultUser();
 
   // 1. Open browser and go to https://demo.testarchitect.com/
-  await page.goto(Env.BASEURL);
-
-  await myPage.goToMyPage();
-
   // 2. Login with valid credentials
   await loginPage.login();
 
@@ -38,7 +31,7 @@ test("Verify users can buy multiple item successfully", async ({
 
   // 6. Proceed to checkout and confirm order
   await cartPage.clickCheckoutBtn();
-  await checkoutPage.submitOrderApplication(user);
+  await checkoutPage.submitOrderApplication(user, PaymentMethods.DIRECT_BANK_TRANSFER);
 
   // 7. Verify order confirmation message
   await expect(orderStatusPage.successMessage).toBeVisible();

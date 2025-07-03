@@ -1,10 +1,8 @@
 import { test, expect } from "@fixtures";
-import { Env } from "@utils/env";
 import { User } from "components/user";
-import { ProductInfo } from "components/product-info";
 import { PriceUtils } from "@utils/price-utils";
 
-test("Verify users can sort items by price", async ({ pages, page }) => {
+test("Verify users can sort items by price", async ({ pages}) => {
   const {
     loginPage,
     productPage,
@@ -13,9 +11,6 @@ test("Verify users can sort items by price", async ({ pages, page }) => {
   const user = User.defaultUser();
 
   // 1. Open browser and go to https://demo.testarchitect.com/
-  await page.goto(Env.BASEURL);
-  await myPage.goToMyPage();
-
   // 2. Login with valid credentials
   await loginPage.login();
 

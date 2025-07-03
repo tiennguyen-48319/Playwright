@@ -1,4 +1,3 @@
-// pages/LoginPage.ts
 import { Env } from "@utils/env";
 import { BasePage } from "./base-page";
 

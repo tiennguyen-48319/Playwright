@@ -1,4 +1,3 @@
-import { BasePage } from "@pages/base-page";
 import { CartPage } from "@pages/cart-page";
 import { CheckoutPage } from "@pages/checkout-page";
 import { LoginPage } from "@pages/login-page";
@@ -6,6 +5,7 @@ import { MyAccountPage } from "@pages/my-account-page";
 import { OrderStatusPage } from "@pages/order-status-page";
 import { ProductPage } from "@pages/product-page";
 import { test as base } from "@playwright/test";
+import { Env } from "@utils/env";
 
 type Pages = {
   loginPage: LoginPage;
@@ -28,6 +28,11 @@ export const test = base.extend<{pages: Pages}>({
     };
     await use(pages);
   },
+});
+
+test.beforeEach(async ({ pages, page}) => {
+  await page.goto(Env.BASEURL);
+  await pages.myPage.goToMyPage();
 });
 
 export { expect } from "@playwright/test";
