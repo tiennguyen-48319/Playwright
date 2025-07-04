@@ -62,16 +62,16 @@ test("Verify users can buy an item successfully", async ({ pages, page }) => {
   await checkoutPage.clickPlaceOrderBtn();
 
   // 16. Verify Order status page displays
-  await expect(orderStatusPage.successMessage).toBeVisible();
+  await expect(orderStatusPage.successMessage).toBeVisible(); //change to line 53
 
   // 17. Verify the Order details with billing and item information
-  await ExpectUtils.expectTextIgnoreCase(orderStatusPage.productName, productInfo.name);
+  await ExpectUtils.expectTextIgnoreCase(orderStatusPage.productName, productInfo.name); // playwright co handle regex nen su dung cua playwright
   await ExpectUtils.expectPriceMatch(orderStatusPage.productPrice, productInfo.price);
   await expect
     .poll(async () => {
       return await orderStatusPage.isBillingInformationMatched(user);
     })
-    .toBe(true);
+    .toBe(true); // change to have text
   await expect(orderStatusPage.detailEmail).toHaveText(user.username);
   await expect(orderStatusPage.detailPhone).toHaveText(user.phone);
 });

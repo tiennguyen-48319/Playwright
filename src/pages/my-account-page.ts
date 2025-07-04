@@ -13,6 +13,7 @@ export class MyAccountPage extends BasePage {
     }
 
     getOrderDate(orderNumber: number) {
+        // change to getbyrole.filter(há:thí.page.getbyrole('cell, Ơname: ordernumber))
         return this.page.locator(`//tr[td[contains(@class,'order-number')]/a[substring(normalize-space(text()), 2) = '${orderNumber}']]/td[contains(@class,'order-date')]`);
     }
 
