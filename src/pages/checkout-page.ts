@@ -1,7 +1,10 @@
 import { BasePage } from "./base-page";
 import { PriceUtils } from "@utils/price-utils";
-import { PaymentMethods } from "data-types/payment-methods";
+import { PaymentMethods } from "data/payment-methods";
 import { User } from "components/user";
+import { LocatorHelper } from "@utils/locator-utils";
+import { StyleUtils } from "@utils/style-utils";
+import { expect } from "@fixtures";
 
 export class CheckoutPage extends BasePage {
   readonly productName = this.page.locator("td.product-name");
@@ -121,4 +124,28 @@ export class CheckoutPage extends BasePage {
     await this.selectPaymentMethod(method);
     await this.clickPlaceOrderBtn();
   }
+
+  // async isBorderFirstNameInputHightlighted() {
+  //   expect(StyleUtils.isElementBorderRed(await LocatorHelper.getBorderColorOfElement(this.firstName))).toBeTruthy();
+  // }
+
+  // async getBorderStreetAddressInput(): Promise<string> {
+  //   return await LocatorHelper.getBorderColorOfElement(this.address);
+  // }
+
+  // async getBorderTownInput(): Promise<string> {
+  //   return await LocatorHelper.getBorderColorOfElement(this.city);
+  // }
+
+  // async getBorderZipCodeInput(): Promise<string> {
+  //   return await LocatorHelper.getBorderColorOfElement(this.zipCode);
+  // }
+
+  // async getBorderPhoneInput(): Promise<string> {
+  //   return await LocatorHelper.getBorderColorOfElement(this.phone);
+  // }
+
+  // async getBorderEmailAddressInput(): Promise<string> {
+  //   return await LocatorHelper.getBorderColorOfElement(this.billEmail);
+  // }
 }

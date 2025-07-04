@@ -8,7 +8,6 @@ test("Verify users can sort items by price", async ({ pages}) => {
     productPage,
     myPage,
   } = pages;
-  const user = User.defaultUser();
 
   // 1. Open browser and go to https://demo.testarchitect.com/
   // 2. Login with valid credentials

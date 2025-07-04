@@ -11,4 +11,8 @@ export class LocatorHelper {
     }
     return null;
   }
+
+  static async getBorderColorOfElement(locator: Locator): Promise<string> {
+    return await locator.evaluate(el => getComputedStyle(el).getPropertyValue("border-top-color"));
+  }
 }

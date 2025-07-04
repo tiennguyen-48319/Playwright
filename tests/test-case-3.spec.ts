@@ -1,6 +1,6 @@
 import { test, expect } from "@fixtures";
 import { User } from "components/user";
-import { PaymentMethods } from "data-types/payment-methods";
+import { PaymentMethods } from "data/payment-methods";
 
 const paymentMethods = [
   PaymentMethods.DIRECT_BANK_TRANSFER,

@@ -1,6 +1,6 @@
 import { test, expect } from "@fixtures";
 import { User } from "components/user";
-import { PaymentMethods } from "data-types/payment-methods";
+import { PaymentMethods } from "data/payment-methods";
 
 test("Verify users can sort items by price", async ({ pages }) => {
   const { checkoutPage, productPage, cartPage, orderStatusPage, myPage } =

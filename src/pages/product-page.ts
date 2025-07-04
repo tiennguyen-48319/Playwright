@@ -1,7 +1,7 @@
 import { ProductInfo } from "components/product-info";
 import { BasePage } from "./base-page";
 import { PriceUtils } from "@utils/price-utils";
-import { SortType } from "data-types/sort-type";
+import { SortType } from "data/sort-type";
 
 export class ProductPage extends BasePage {
   readonly usernameInput = this.page.getByRole("textbox", { name: "username" });

@@ -1,7 +1,7 @@
 import { test, expect } from "@fixtures";
-import { Departments } from "data-types/departments";
-import { User } from "components/user";
-import { expectPriceMatch, expectTextIgnoreCase } from "@utils/expect-utils";
+import { ExpectUtils } from "@utils/expect-utils";
+import { Departments } from "@data/departments";
+import { User } from "@components/user";
 
 test("Verify users can buy an item successfully", async ({ pages, page }) => {
   const {
@@ -44,7 +44,7 @@ test("Verify users can buy an item successfully", async ({ pages, page }) => {
 
   // 11. Verify item details in mini content
   await expect(cartPage.productName).toHaveText(productInfo.name);
-  await expectPriceMatch(cartPage.productPrice, productInfo.price);
+  await ExpectUtils.expectPriceMatch(cartPage.productPrice, productInfo.price);
 
   // 12. Click on Checkout
   await cartPage.clickCheckoutBtn();
@@ -53,7 +53,7 @@ test("Verify users can buy an item successfully", async ({ pages, page }) => {
   await expect(page).toHaveTitle(/Checkout/i);
 
   // 14. Verify item details in order
-  await expectTextIgnoreCase(checkoutPage.productName, productInfo.name);
+  await ExpectUtils.expectTextIgnoreCase(checkoutPage.productName, productInfo.name);
 
   // 15. Fill the billing details with default payment method
   await checkoutPage.fillInfo(user);
@@ -65,8 +65,8 @@ test("Verify users can buy an item successfully", async ({ pages, page }) => {
   await expect(orderStatusPage.successMessage).toBeVisible();
 
   // 17. Verify the Order details with billing and item information
-  await expectTextIgnoreCase(orderStatusPage.productName, productInfo.name);
-  await expectPriceMatch(orderStatusPage.productPrice, productInfo.price);
+  await ExpectUtils.expectTextIgnoreCase(orderStatusPage.productName, productInfo.name);
+  await ExpectUtils.expectPriceMatch(orderStatusPage.productPrice, productInfo.price);
   await expect
     .poll(async () => {
       return await orderStatusPage.isBillingInformationMatched(user);

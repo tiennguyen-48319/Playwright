@@ -13,6 +13,11 @@ export class CartPage extends BasePage {
   readonly plusButton = this.page.locator("span.plus");
   readonly minusButton = this.page.locator("span.minus");
   readonly subTotal = this.page.locator("td.product-subtotal");
+  readonly clearCart = this.page.locator("a.clear-cart");
+
+  async clickClearCart() {
+    await this.clearCart.click();
+  }
 
   async getQuantityProduct(): Promise<number> {
     const value = await this.quantityInput.inputValue();
@@ -43,7 +48,7 @@ export class CartPage extends BasePage {
   }
 
   async clickCheckoutBtn(): Promise<void> {
-    await this.checkoutButton.click();
+    await this.checkoutButton.click({timeout: 10000});
   }
 
   async getAllProducts(): Promise<ProductInfo[]> {
@@ -74,7 +79,4 @@ export class CartPage extends BasePage {
     }
   }
 
-  async isEmptyMsgDisplayed(): Promise<boolean> {
-    return await this.emptyMsg.isVisible();
-  }
 }

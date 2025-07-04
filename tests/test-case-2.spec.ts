@@ -1,7 +1,7 @@
 import { test, expect } from "@fixtures";
 import { User } from "components/user";
 import { ProductInfo } from "components/product-info";
-import { PaymentMethods } from "data-types/payment-methods";
+import { PaymentMethods } from "data/payment-methods";
 
 test("Verify users can buy multiple item successfully", async ({pages}) => {
   const {
