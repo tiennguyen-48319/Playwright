@@ -52,7 +52,7 @@ npm install
 BASE_URL=https://demo.testarchitect.com/
 DEFAULT_USER=garrus.amajae@fsitip.com
 DEFAULT_PASSWORD=tienphucnguyen12345
-PHONE_NUMBER=0901231567
+PHONE_NUMBER=0905123123
 ```
 
 # 📄 License
