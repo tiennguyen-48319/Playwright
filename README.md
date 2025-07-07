@@ -13,18 +13,18 @@ This is an end-to-end (E2E) test automation framework built using [Playwright](h
 - ✅ Custom Fixtures, Page Object Model, Environment Management
 
 ---
-
+```
 ## 📁 Project Structure
-├── tests/ # Test specs
-├── pages/ # Page Object Models
+├── tests/   # Test specs
+├── pages/   # Page Object Models
 ├── fixtures(e.g., loginPage, checkoutPage,...)
-├── utils/ # Helpers: env, date-utils, expect-utils, locator-utils, price-utils, price-utils, style-utils.
-├── data/ # billing-error-messages, departments, payment-methods, sort-type
-├── config/ # Playwright config files
-├── .env # Environment variables
-├── playwright.config.ts # Main Playwright config
+├── utils/   # Helpers: env, date-utils, expect-utils, locator-utils, price-utils, price-utils, style-utils.
+├── data/   # billing-error-messages, departments, payment-methods, sort-type
+├── config/   # Playwright config files
+├── .env   # Environment variables
+├── playwright.config.ts   # Main Playwright config
 └── README.md
-
+```
 ---
 
 ## 🛠 Installation
