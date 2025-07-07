@@ -37,4 +37,18 @@ npm install
 
 ## Run all tests: `npx playwright test`
 
+## Run a specific test file: `npx playwright test tests/test-case-1.spec.ts`
+
+## Run with headed browser: `npx playwright test --headed`
+
+## Run with UI mode: `npx playwright test --ui`
+
+# 🔐 Environment Setup
+BASE_URL=https://demo.testarchitect.com/
+DEFAULT_USER=garrus.amajae@fsitip.com
+DEFAULT_PASSWORD=tienphucnguyen12345
+PHONE_NUMBER=0901231567
+
+# 📄 License
+MIT
 
