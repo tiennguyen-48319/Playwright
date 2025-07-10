@@ -1,5 +1,4 @@
 import { test, expect } from "@fixtures";
-import { User } from "components/user";
 import { PriceUtils } from "@utils/price-utils";
 
 test("Verify users can sort items by price", async ({ pages}) => {

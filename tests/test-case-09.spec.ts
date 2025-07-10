@@ -1,9 +1,7 @@
 import { test, expect } from "@fixtures";
-import { User } from "components/user";
 
 test("Verify users can sort items by price", async ({ pages }) => {
-  const { loginPage, checkoutPage, productPage, cartPage, myPage } = pages;
-  const user = User.defaultUser();
+  const { loginPage, productPage, cartPage, myPage } = pages;
 
   // 1. Open browser and go to https://demo.testarchitect.com/
   // 2. Login with valid credentials

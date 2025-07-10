@@ -13,15 +13,6 @@ export class ExpectUtils {
       .toBe(expected);
   }
 
-  static async expectTextIgnoreCase(locator: Locator, expected: string) {
-    await expect
-      .poll(async () => {
-        const text = await locator.textContent();
-        return text?.trim().toLowerCase();
-      })
-      .toContain(expected.toLowerCase());
-  }
-
   static async expectBorderRed(locator: Locator, timeout?: 5000) {
     await expect
       .poll(

@@ -1,7 +1,7 @@
 import { test, expect } from "@fixtures";
 import { ExpectUtils } from "@utils/expect-utils";
 import { Departments } from "@data/departments";
-import { User } from "@components/user";
+import { defaultUser as user } from "@components/user";
 
 test("Verify users can buy an item successfully", async ({ pages, page }) => {
   const {
@@ -12,8 +12,6 @@ test("Verify users can buy an item successfully", async ({ pages, page }) => {
     orderStatusPage,
     myPage,
   } = pages;
-
-  const user = User.defaultUser();
 
   // 1. Open browser and go to https://demo.testarchitect.com/'
   // 2. Login with valid credentials
@@ -50,28 +48,24 @@ test("Verify users can buy an item successfully", async ({ pages, page }) => {
   await cartPage.clickCheckoutBtn();
 
   // 13. Verify Checkbout page displays
-  await expect(page).toHaveTitle(/Checkout/i);
+  await expect(page).toHaveURL(/Checkout/i);
 
   // 14. Verify item details in order
-  await ExpectUtils.expectTextIgnoreCase(checkoutPage.productName, productInfo.name);
+  await expect(checkoutPage.productName).toHaveText(new RegExp(productInfo.name, "i"));
 
   // 15. Fill the billing details with default payment method
-  await checkoutPage.fillInfo(user);
+  await checkoutPage.fillInfo();
 
   // 16. Click on PLACE ORDER
   await checkoutPage.clickPlaceOrderBtn();
 
   // 16. Verify Order status page displays
-  await expect(orderStatusPage.successMessage).toBeVisible(); //change to line 53
+  await expect(page).toHaveURL(/order-received/i);
 
   // 17. Verify the Order details with billing and item information
-  await ExpectUtils.expectTextIgnoreCase(orderStatusPage.productName, productInfo.name); // playwright co handle regex nen su dung cua playwright
+  await expect(orderStatusPage.productName).toHaveText(new RegExp(productInfo.name, "i"));
   await ExpectUtils.expectPriceMatch(orderStatusPage.productPrice, productInfo.price);
-  await expect
-    .poll(async () => {
-      return await orderStatusPage.isBillingInformationMatched(user);
-    })
-    .toBe(true); // change to have text
+  await expect(orderStatusPage.billInformation).toHaveText(new RegExp(`${user.firstName} ${user.lastName}.*${user.city}.*${user.country}`, 'i'));
   await expect(orderStatusPage.detailEmail).toHaveText(user.username);
   await expect(orderStatusPage.detailPhone).toHaveText(user.phone);
 });

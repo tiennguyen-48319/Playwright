@@ -1,10 +1,7 @@
 import { BasePage } from "./base-page";
 import { PriceUtils } from "@utils/price-utils";
 import { PaymentMethods } from "data/payment-methods";
-import { User } from "components/user";
-import { LocatorHelper } from "@utils/locator-utils";
-import { StyleUtils } from "@utils/style-utils";
-import { expect } from "@fixtures";
+import { defaultUser as user } from "components/user";
 
 export class CheckoutPage extends BasePage {
   readonly productName = this.page.locator("td.product-name");
@@ -93,7 +90,7 @@ export class CheckoutPage extends BasePage {
     }
   }
 
-  async fillInfo(user: User) {
+  async fillInfo() {
     await this.enterFirstName(user.firstName);
     await this.enterLastName(user.lastName);
     await this.selectCountry(user.country);
@@ -114,38 +111,14 @@ export class CheckoutPage extends BasePage {
 
   async clickPlaceOrderBtn() {
     await this.placeOrderButton.click();
+    await this.placeOrderButton.waitFor({ state: 'detached' });
   }
 
   async submitOrderApplication(
-    user: User,
     method: PaymentMethods
   ) {
-    await this.fillInfo(user);
+    await this.fillInfo();
     await this.selectPaymentMethod(method);
     await this.clickPlaceOrderBtn();
   }
-
-  // async isBorderFirstNameInputHightlighted() {
-  //   expect(StyleUtils.isElementBorderRed(await LocatorHelper.getBorderColorOfElement(this.firstName))).toBeTruthy();
-  // }
-
-  // async getBorderStreetAddressInput(): Promise<string> {
-  //   return await LocatorHelper.getBorderColorOfElement(this.address);
-  // }
-
-  // async getBorderTownInput(): Promise<string> {
-  //   return await LocatorHelper.getBorderColorOfElement(this.city);
-  // }
-
-  // async getBorderZipCodeInput(): Promise<string> {
-  //   return await LocatorHelper.getBorderColorOfElement(this.zipCode);
-  // }
-
-  // async getBorderPhoneInput(): Promise<string> {
-  //   return await LocatorHelper.getBorderColorOfElement(this.phone);
-  // }
-
-  // async getBorderEmailAddressInput(): Promise<string> {
-  //   return await LocatorHelper.getBorderColorOfElement(this.billEmail);
-  // }
 }

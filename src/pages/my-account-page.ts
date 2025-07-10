@@ -13,12 +13,13 @@ export class MyAccountPage extends BasePage {
     }
 
     getOrderDate(orderNumber: number) {
-        // change to getbyrole.filter(há:thí.page.getbyrole('cell, Ơname: ordernumber))
-        return this.page.locator(`//tr[td[contains(@class,'order-number')]/a[substring(normalize-space(text()), 2) = '${orderNumber}']]/td[contains(@class,'order-date')]`);
+        // return this.page.locator(`//tr[td[contains(@class,'order-number')]/a[substring(normalize-space(text()), 2) = '${orderNumber}']]/td[contains(@class,'order-date')]`);
+        return this.page.getByRole('row').filter({has: this.page.getByRole('cell', { name: orderNumber.toString()}),}).locator('td[class*=order-date]');
     }
 
     getTotalOrder(orderNumber: number) {
-        return this.page.locator(`//tr[td[contains(@class,'order-number')]/a[substring(normalize-space(text()), 2) = '${orderNumber}']]/td[contains(@class,'order-total')]/span`);
+        // return this.page.locator(`//tr[td[contains(@class,'order-number')]/a[substring(normalize-space(text()), 2) = '${orderNumber}']]/td[contains(@class,'order-total')]/span`);
+        return this.page.getByRole('row').filter({has: this.page.getByRole('cell', { name: orderNumber.toString()}),}).locator('td[class*=order-total]>span');
     }
 
     async getOrderDateMatched(orderNumber: number): Promise<Date> {

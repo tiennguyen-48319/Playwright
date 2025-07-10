@@ -1,6 +1,5 @@
 import { BasePage } from "./base-page";
 import { PriceUtils } from "@utils/price-utils";
-import { User } from "components/user";
 import { ConvertUtils } from "@utils/date-utils";
 import { OrderInfo } from "components/order-info";
 
@@ -38,14 +37,8 @@ export class OrderStatusPage extends BasePage {
     return PriceUtils.extractMinPriceFromText(rawText ?? "");
   }
 
-  async isBillingInformationMatched(user: User): Promise<boolean> {
-    const billText = (await this.billInformation.textContent()) ?? "";
-    return [
-      `${user.firstName} ${user.lastName}`,
-      user.address,
-      user.city,
-      user.country,
-    ].every((item) => billText.includes(item));
+  async getBillingInformation() {
+    return await this.billInformation.textContent() ?? "";
   }
 
   async getDetailPhoneNumber(): Promise<string> {

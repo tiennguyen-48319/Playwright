@@ -5,7 +5,7 @@ import { ProductInfo } from "components/product-info";
 export class CartPage extends BasePage {
   readonly productName = this.page.locator(".product-title");
   readonly productPrice = this.page.locator("td.product-price");
-  readonly checkoutButton = this.page.locator("a.checkout-button");
+  readonly checkoutButton = this.page.getByRole("link", {name: 'PROCEED TO CHECKOUT'});
   readonly removeButtons = this.page.locator("a.remove-item");
   readonly emptyMsg = this.page.locator("div.cart-empty > h1");
   readonly productRows = this.page.locator("table.shop_table.cart tbody tr");
@@ -48,7 +48,7 @@ export class CartPage extends BasePage {
   }
 
   async clickCheckoutBtn(): Promise<void> {
-    await this.checkoutButton.click({timeout: 10000});
+    await this.checkoutButton.click();
   }
 
   async getAllProducts(): Promise<ProductInfo[]> {
@@ -60,14 +60,10 @@ export class CartPage extends BasePage {
 
       const name =
         (await row.locator(".product-title").textContent())?.trim() ?? "";
-      const type =
-        (await row.locator(".products-page-cats").textContent())?.trim() ?? "";
-      const star =
-        (await row.locator(".star-rating").getAttribute("class")) ?? "";
-      const priceText = await row.locator(".price").textContent();
+      const priceText = await row.locator(".product-price").textContent();
       const price = PriceUtils.extractMinPriceFromText(priceText ?? "");
 
-      products.push({ name, type, star, price });
+      products.push({ name, price });
     }
 
     return products;

@@ -1,5 +1,4 @@
 import { test, expect } from "@fixtures";
-import { User } from "components/user";
 import { PaymentMethods } from "data/payment-methods";
 
 test("Verify users can sort items by price", async ({ pages}) => {
@@ -11,7 +10,6 @@ test("Verify users can sort items by price", async ({ pages}) => {
     orderStatusPage,
     myPage,
   } = pages;
-  const user = User.defaultUser();
 
   // 0. Precondition
   await loginPage.login();
@@ -21,7 +19,7 @@ test("Verify users can sort items by price", async ({ pages}) => {
   await productPage.addToCart(productPosition);
   await productPage.goToCartPage();
   await cartPage.clickCheckoutBtn();
-  await checkoutPage.submitOrderApplication(user, PaymentMethods.DIRECT_BANK_TRANSFER);
+  await checkoutPage.submitOrderApplication(PaymentMethods.DIRECT_BANK_TRANSFER);
   const orderInfo1 = await orderStatusPage.getOrderInfo();
 
   await orderStatusPage.goToShopPage();
@@ -30,7 +28,7 @@ test("Verify users can sort items by price", async ({ pages}) => {
   await productPage.addToCart(productPosition);
   await productPage.goToCartPage();
   await cartPage.clickCheckoutBtn();
-  await checkoutPage.submitOrderApplication(user, PaymentMethods.DIRECT_BANK_TRANSFER);
+  await checkoutPage.submitOrderApplication(PaymentMethods.DIRECT_BANK_TRANSFER);
   const orderInfo2 = await orderStatusPage.getOrderInfo();
 
   // 1. Go to My Account page

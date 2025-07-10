@@ -1,5 +1,5 @@
 import { test, expect } from "@fixtures";
-import { User } from "components/user";
+import { defaultUser as user } from "components/user";
 import { PaymentMethods } from "data/payment-methods";
 
 const paymentMethods = [
@@ -19,7 +19,6 @@ for (const method of paymentMethods) {
       orderStatusPage,
       myPage,
     } = pages;
-    const user = User.defaultUser();
 
     // 1. Open browser and go to https://demo.testarchitect.com/
     // 2. Login with valid credentials
@@ -39,7 +38,7 @@ for (const method of paymentMethods) {
 
     // 6. Choose a different payment method (Direct bank transfer, Cash on delivery)
     // 7. Complete the payment process
-    await checkoutPage.submitOrderApplication(user, method);
+    await checkoutPage.submitOrderApplication(method);
 
     // 8. Verify order confirmation message
     await expect(orderStatusPage.successMessage).toBeVisible();

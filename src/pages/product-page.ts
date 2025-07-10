@@ -5,8 +5,8 @@ import { SortType } from "data/sort-type";
 
 export class ProductPage extends BasePage {
   readonly usernameInput = this.page.getByRole("textbox", { name: "username" });
-  readonly gridViewButton = this.page.locator("div[class*=switch-grid] > a");
-  readonly listViewButton = this.page.locator("div.switch-list > a");
+  readonly gridViewButton = this.page.locator("div[class*=switch-grid]");
+  readonly listViewButton = this.page.locator("div.switch-list");
   readonly sorting = this.page.locator("select.orderby");
   readonly allPrice = this.page.locator("div.content-product span.price");
 
@@ -61,14 +61,10 @@ export class ProductPage extends BasePage {
 
   async getProductInfo(index: number): Promise<ProductInfo> {
     const name = (await this.getProductName(index).textContent()) ?? "";
-    const type = (await this.getProductType(index).textContent()) ?? "";
-    const star = (await this.getProductStar(index).getAttribute("class")) ?? "";
     const price = (await this.getProductPrice(index).textContent()) ?? "";
 
     return {
       name: name.trim(),
-      type: type.trim(),
-      star,
       price: PriceUtils.extractMinPriceFromText(price),
     };
   }
